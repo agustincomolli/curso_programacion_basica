@@ -36,7 +36,7 @@ function dibujar(detalles_evento)
         ABAJO: 40       // Flecha derecha
     };
     var color = "darkcyan";
-    var movimiento = 10;
+    var movimiento = 3;
 
     if (detalles_evento.keyCode == teclas.IZQUIERDA)
     {
@@ -67,7 +67,7 @@ function dibujar(detalles_evento)
 
 
 // Agregar EventListener
-document.addEventListener("keyup", dibujar);
+document.addEventListener("keydown", dibujar);
 // Obtener elemento html através de si Id.
 var dibujo_canvas = document.getElementById("area_dibujo");
 // Obtener el área de dibujo.
@@ -75,4 +75,4 @@ var superficie = dibujo_canvas.getContext("2d");
 var x = 150;
 var y = 150;
 
-dibujar_linea(superficie, "blue", 149, 149, 151, 151);
+dibujar_linea(superficie, "blue", x - 1,  y - 1, x + 1, y + 1);
