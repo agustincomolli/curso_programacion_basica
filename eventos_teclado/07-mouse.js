@@ -20,6 +20,37 @@ function dibujar_linea(lienzo, color, x_inicio, y_inicio, x_fin, y_fin)
 }
 
 
+function empezar_dibujo(lienzo, color, x, y)
+{
+/* 
+    DESCRIPCION: Mientras el mouse esté presionado dibujar.
+    PARAMETROS:
+        lienzo = objeto - es la superficie donde se va a dibujar.
+        color = string - color de la línea (red,  green, blue, etc)
+        x = int - posición de la línea en el eje X
+        y = int - posición de la línea en el eje Y
+*/
+    lienzo.beginPath();
+    lienzo.strokeStyle = color;
+    lienzo.lineWidth = 3
+    lienzo.moveTo(x, y);
+    lienzo.lineTo(x, y);
+    lienzo.stroke();
+    lienzo.closePath();
+}
+
+
+function terminar_dibujo(lienzo)
+{
+/*
+    DESCRIPCION: Cuando se deja de apretar el botón del mouse, dejar de dibujar.
+    PARAMETROS:
+        lienzo = objeto - es la superficie donde se va a dibujar.
+*/
+    lienzo.closePath();
+}
+
+
 function dibujar(detalles_evento)
 {
     /* 
@@ -28,51 +59,28 @@ function dibujar(detalles_evento)
         este caso el más importante es el keyCode para saber la tecla oprimida.
     */
 
-    var teclas = 
-    {
-        IZQUIERDA: 37,  // Flecha izquierda
-        ARRIBA: 38,     // Flecha arriba
-        DERECHA: 39,    // Flecha abajo
-        ABAJO: 40       // Flecha derecha
-    };
     var color = "darkcyan";
-    var movimiento = 3;
 
-    if (detalles_evento.keyCode == teclas.IZQUIERDA)
+    if (detalles_evento.button == 0 && detalles_evento.type == "mousedown")
     {
-        dibujar_linea(superficie, color, x, y, x - movimiento, y);
-        x -= movimiento;
+        console.log("Empezar a dibujar.")
+        //empezar_dibujo(superficie, color, detalles_evento.clientX, detalles_evento.clientY);
+        empezar_dibujo(superficie, color, detalles_evento.offsetX, offsetY);
     }
-    else if (detalles_evento.keyCode == teclas.ARRIBA)
+    else if (detalles_evento.button == 0 && detalles_evento.type == "mouseup")
     {
-        dibujar_linea(superficie, color, x, y, x, y - movimiento);
-        y -= movimiento;
+        console.log("Terminar de dibujar.")
+        terminar_dibujo(superficie);
     }
-    else if (detalles_evento.keyCode == teclas.ABAJO)
-    {
-        dibujar_linea(superficie, color, x, y, x, y + movimiento);
-        y += movimiento;
-    }
-    else if (detalles_evento.keyCode == teclas.DERECHA)
-    {
-        dibujar_linea(superficie, color, x, y, x + movimiento, y);
-        x += movimiento;
-    }
-    else
-    {
-        console.log("Otra tecla presionada.");
-    }
-
 }
 
 
-// Agregar EventListener
-document.addEventListener("keydown", dibujar);
 // Obtener elemento html através de si Id.
 var dibujo_canvas = document.getElementById("area_dibujo");
 // Obtener el área de dibujo.
 var superficie = dibujo_canvas.getContext("2d");
-var x = 150;
-var y = 150;
 
-dibujar_linea(superficie, "blue", x - 1,  y - 1, x + 1, y + 1);
+// Agregar EventListener al canvas.
+dibujo_canvas.addEventListener("mousedown", dibujar);
+dibujo_canvas.addEventListener("mouseup", dibujar);
+
