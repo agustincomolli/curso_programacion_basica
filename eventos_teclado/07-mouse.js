@@ -20,37 +20,6 @@ function dibujar_linea(lienzo, color, x_inicio, y_inicio, x_fin, y_fin)
 }
 
 
-function empezar_dibujo(lienzo, color, x, y)
-{
-/* 
-    DESCRIPCION: Mientras el mouse esté presionado dibujar.
-    PARAMETROS:
-        lienzo = objeto - es la superficie donde se va a dibujar.
-        color = string - color de la línea (red,  green, blue, etc)
-        x = int - posición de la línea en el eje X
-        y = int - posición de la línea en el eje Y
-*/
-    lienzo.beginPath();
-    lienzo.strokeStyle = color;
-    lienzo.lineWidth = 3
-    lienzo.moveTo(x, y);
-    lienzo.lineTo(x, y);
-    lienzo.stroke();
-    lienzo.closePath();
-}
-
-
-function terminar_dibujo(lienzo)
-{
-/*
-    DESCRIPCION: Cuando se deja de apretar el botón del mouse, dejar de dibujar.
-    PARAMETROS:
-        lienzo = objeto - es la superficie donde se va a dibujar.
-*/
-    lienzo.closePath();
-}
-
-
 function dibujar(detalles_evento)
 {
     /* 
@@ -60,17 +29,24 @@ function dibujar(detalles_evento)
     */
 
     var color = "darkcyan";
+    var es_dibujo = false;
+    var x = detalles_evento.offsetX;
+    var y = detalles_evento.offsetY;
 
     if (detalles_evento.button == 0 && detalles_evento.type == "mousedown")
     {
         console.log("Empezar a dibujar.")
-        //empezar_dibujo(superficie, color, detalles_evento.clientX, detalles_evento.clientY);
-        empezar_dibujo(superficie, color, detalles_evento.offsetX, offsetY);
+        es_dibujo = true;
+        dibujar_linea(superficie, color, x, y, x, y)
+    }
+    else if (es_dibujo)
+    {
+        dibujar_linea(superficie, color, x, y, x, y)
     }
     else if (detalles_evento.button == 0 && detalles_evento.type == "mouseup")
     {
         console.log("Terminar de dibujar.")
-        terminar_dibujo(superficie);
+        es_dibujo = false;
     }
 }
 
@@ -83,4 +59,4 @@ var superficie = dibujo_canvas.getContext("2d");
 // Agregar EventListener al canvas.
 dibujo_canvas.addEventListener("mousedown", dibujar);
 dibujo_canvas.addEventListener("mouseup", dibujar);
-
+dibujo_canvas.addEventListener("mousemove", dibujar)
