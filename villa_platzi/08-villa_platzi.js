@@ -13,9 +13,22 @@ function num_aleatorio(min, max)
 }
 
 
-document.write("Generar 10 números aleatorios: ");
-for (i = 0; i < 10; i++)
+function dibujar_mapa()
 {
-    var un_número = num_aleatorio(1, 10);
-    document.write(un_número + " ");
+    /*     
+    DESCRIPCION: Muestra en el canvas la imagen de fondo.
+    */
+
+    superficie.drawImage(imagen, 0, 0);
 }
+
+
+var dibujo_canvas = document.getElementById("dibujo_canvas");
+var superficie = dibujo_canvas.getContext("2d");
+
+var fondo = "tile.png";
+var imagen = new Image(); // Declarar variable de objeto Image.
+
+imagen.src = fondo;
+
+imagen.addEventListener("load", dibujar_mapa)
