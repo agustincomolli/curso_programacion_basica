@@ -22,6 +22,7 @@ function dibujar_linea(lienzo, color, x_inicio, y_inicio, x_fin, y_fin)
     var antialiasing = (grosor_linea - 1) / 2;
     lienzo.beginPath();
     lienzo.strokeStyle = color;
+    lienzo.lineCap = "round";
     lienzo.lineWidth = grosor_linea;
     lienzo.moveTo(x_inicio - antialiasing, y_inicio + antialiasing);
     lienzo.lineTo(x_fin + antialiasing, y_fin + antialiasing);
@@ -49,21 +50,14 @@ function empezar_dibujo(detalles_evento)
 }
 
 
-function terminar_dibujo(detalles_evento)
+function terminar_dibujo()
 {
     /* 
         DESCRIPCION: Cambiar a false "esta_dibujando" para indicar que deje 
                      de dibujar.
-        PARAMETROS: detelles_evento = tiene todos los datos del evento 
-                    ocurrido.
     */
     
-    // button == 0 es el botón izquierdo del mouse.
-    if (detalles_evento.button == 0 && detalles_evento.type == "mouseup")
-    {
-        esta_dibujando = false;
-    }
-
+    esta_dibujando = false;
 }
 
 
