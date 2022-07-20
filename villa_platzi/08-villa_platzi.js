@@ -16,19 +16,56 @@ function num_aleatorio(min, max)
 function dibujar_mapa()
 {
     /*     
-    DESCRIPCION: Muestra en el canvas la imagen de fondo.
+    DESCRIPCION: Muestra en el canvas la imagen de archivo_fondo.
     */
 
-    superficie.drawImage(imagen, 0, 0);
+    superficie.drawImage(img_fondo, 0, 0);
+}
+
+
+function dibujar_cerdos();
+{
+    /*     
+    DESCRIPCION: Muestra en el canvas la imagen de cerdo.png.
+    */
+
+}
+
+
+function dibujar_pollos();
+{
+    /*     
+    DESCRIPCION: Muestra en el canvas la imagen de pollo.png.
+    */
+
+}
+
+
+function dibujar_vacas();
+{
+    /*     
+    DESCRIPCION: Muestra en el canvas la imagen de vaca.png.
+    */
+
 }
 
 
 var dibujo_canvas = document.getElementById("dibujo_canvas");
 var superficie = dibujo_canvas.getContext("2d");
 
-var fondo = "tile.png";
-var imagen = new Image(); // Declarar variable de objeto Image.
+var archivo_fondo = "tile.png";
+var img_fondo = new Image(); // Declarar variable de objeto Image.
+var img_vaca = new Image();
+var img_cerdo = new Image();
+var img_pollo = new Image();
 
-imagen.src = fondo;
+img_fondo.src = archivo_fondo;
+img_vaca.src = "vaca.png";
+img_cerdo.src = "cerdo.png";
+img_pollo.src = "pollo.png"
 
-imagen.addEventListener("load", dibujar_mapa)
+// Agregar manejadores de eventos.
+img_fondo.addEventListener("load", dibujar_mapa);
+img_cerdo.addEventListener("load", dibujar_cerdos);
+img_pollo.addEventListener("load", dibujar_pollos);
+img_vaca.addEventListener("load", dibujar_pollos);
