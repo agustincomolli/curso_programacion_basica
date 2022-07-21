@@ -13,59 +13,129 @@ function num_aleatorio(min, max)
 }
 
 
-function dibujar_mapa()
+function dibujar()
 {
     /*     
-    DESCRIPCION: Muestra en el canvas la imagen de archivo_fondo.
+    DESCRIPCION: dibuja las imágenes en el canvas en el orden correcto.
     */
-
-    superficie.drawImage(img_fondo, 0, 0);
+   if (fondo.esta_cargado)
+   {
+        superficie.drawImage(fondo.imagen, 0, 0);
+   }
+   if (vaca.esta_cargado)
+   {
+        for (var i= 0; i < vaca.cant_max; i++)
+        {
+            // ancho canvas = 500
+            // ancho animal = 80
+            // posicion = (500 / 80)
+            var x = num_aleatorio(0, 420);
+            var y = num_aleatorio(0, 420);
+            superficie.drawImage(vaca.imagen, x, y);
+        }
+   }
+   if (pollo.esta_cargado)
+   {
+    for (var i= 0; i < pollo.cant_max; i++)
+    {
+        var x = num_aleatorio(0, 420);
+        var y = num_aleatorio(0, 420);
+        superficie.drawImage(pollo.imagen, x, y);
+    }
+}
+   if (cerdo.esta_cargado)
+   {
+    for (var i= 0; i < cerdo.cant_max; i++)
+    {
+        var x = num_aleatorio(0, 420);
+        var y = num_aleatorio(0, 420);
+        superficie.drawImage(cerdo.imagen, x, y);
+    }
+}
 }
 
 
-function dibujar_cerdos();
+function cargar_fondo()
 {
     /*     
-    DESCRIPCION: Muestra en el canvas la imagen de cerdo.png.
+    DESCRIPCION: Indica que la imágen está lista para ser dibujada.
     */
 
+    fondo.esta_cargado = true;
+    dibujar();
 }
 
 
-function dibujar_pollos();
+function cargar_cerdos()
 {
     /*     
-    DESCRIPCION: Muestra en el canvas la imagen de pollo.png.
+    DESCRIPCION: Indica que la imágen está lista para ser dibujada.
     */
-
+    cerdo.esta_cargado = true;
+    dibujar();
 }
 
 
-function dibujar_vacas();
+function cargar_pollos()
 {
     /*     
-    DESCRIPCION: Muestra en el canvas la imagen de vaca.png.
+    DESCRIPCION: Indica que la imágen está lista para ser dibujada.
     */
+    pollo.esta_cargado = true;
+    dibujar();
+}
 
+
+function cargar_vacas()
+{
+    /*     
+    DESCRIPCION: Indica que la imágen está lista para ser dibujada.
+    */
+    vaca.esta_cargado = true;
+    dibujar();
 }
 
 
 var dibujo_canvas = document.getElementById("dibujo_canvas");
 var superficie = dibujo_canvas.getContext("2d");
 
-var archivo_fondo = "tile.png";
-var img_fondo = new Image(); // Declarar variable de objeto Image.
-var img_vaca = new Image();
-var img_cerdo = new Image();
-var img_pollo = new Image();
+var fondo = 
+{
+    url: "tile.png",
+    esta_cargado: false
+};
+var vaca = 
+{
+    url: "vaca.png",
+    esta_cargado: false,
+    cant_max: 10
+};
+var pollo = 
+{
+    url: "pollo.png",
+    esta_cargado: false,
+    cant_max: 10
+};
+var cerdo = 
+{
+    url: "cerdo.png",
+    esta_cargado: false,
+    cant_max: 10
+};
 
-img_fondo.src = archivo_fondo;
-img_vaca.src = "vaca.png";
-img_cerdo.src = "cerdo.png";
-img_pollo.src = "pollo.png"
+// Agregar objeto Image a las variables.
+fondo.imagen = new Image(); 
+vaca.imagen = new Image();
+cerdo.imagen = new Image();
+pollo.imagen = new Image();
+
+fondo.imagen.src = fondo.url;
+vaca.imagen.src = vaca.url;
+cerdo.imagen.src = cerdo.url;
+pollo.imagen.src = pollo.url
 
 // Agregar manejadores de eventos.
-img_fondo.addEventListener("load", dibujar_mapa);
-img_cerdo.addEventListener("load", dibujar_cerdos);
-img_pollo.addEventListener("load", dibujar_pollos);
-img_vaca.addEventListener("load", dibujar_pollos);
+fondo.imagen.addEventListener("load", cargar_fondo);
+cerdo.imagen.addEventListener("load", cargar_cerdos);
+pollo.imagen.addEventListener("load", cargar_pollos);
+vaca.imagen.addEventListener("load", cargar_vacas);
