@@ -5,11 +5,23 @@ body
     color: antiquewhite;
     text-align: center;
 }
+
 h1
 {
     color: bisque;
 }
+
 h2
 {
     color:chocolate
+}
+
+p#guerrero
+{
+    border-color: chocolate;
+    border-width: 4px;
+    border-style: solid;
+    padding: 10px;
+    margin-left: 30%;
+    margin-right: 30%;
 }
