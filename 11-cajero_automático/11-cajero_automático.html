@@ -11,15 +11,23 @@
 
 <body>
     <h1>💵💶Cajero Automático💶💵</h1>
-    <p>
-        <img src="imagenes/cajero.gif" alt="imágen del cajero automático">
-    </p>
-    <p>
-        <input type="number" name="cantidad" min="10" max="99999" value="0" id="cantidad">
-        <input type="button" value="Extraer" id="extraer">
-        <br />
-    </p>
-    <p id="resultado"></p>
+    <table align="center">
+        <tr>
+            <td>
+                <img src="imagenes/cajero.gif" alt="imágen del cajero automático">
+                <p>
+                    <input type="number" name="cantidad" min="10" max="99999" value="0" id="cantidad">
+                    <input type="button" value="Extraer" id="extraer">
+                    <br />
+                </p>
+            </td>
+            <td id="operaciones">Dinero disponible:</td>
+        </tr>
+        <tr>
+            <td id="resultado">
+            </td>
+        </tr>
+    </table>
     <script src="billete.js"></script>
     <script src="11-cajero_automático.js"></script>
 </body>

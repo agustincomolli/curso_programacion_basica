@@ -6,7 +6,6 @@ class billete
     {
         this.valor = valor;
         this.cantidad = cantidad;
-        this.imagen = new Image();
-        this.imagen.src = imagen;
+        this.imagen = imagen;
     }
 }

@@ -33,9 +33,23 @@ input[type="button"]
     padding-bottom: 3px;
 }
 
-p#resultado
+td#resultado
 {
     font-weight: bold;
     font-size: large;
-    margin-top: 10px;
+    padding-top: 8pt;
+}
+
+td#operaciones{
+    vertical-align: top;
+    padding-top: 8pt;
+    padding-left: 8pt;
+    font-size: medium;
+    font-weight: bolder;
+    color:navy;
+}
+
+p#alerta
+{
+    color:darkred;
 }
